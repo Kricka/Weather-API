@@ -4,10 +4,11 @@ import numpy as np
 
 app=Flask(__name__)
 
-
+stations=pd.read_csv("data/stations.txt",skiprows=17)
+stations2=stations[['STAID','STANAME                                 ']]
 @app.route("/")
 def home():
-    return render_template("home.html")
+    return render_template("home.html",data=stations2.to_html())
 
 @app.route("/api/v1/<station>/<date>/")
 def about(station,date):
